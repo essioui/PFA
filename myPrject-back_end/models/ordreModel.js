@@ -27,6 +27,10 @@ const orderSchema = mongoose.Schema({
         type: String,
         default: 'pending'
     },
+    adminMessage: {
+        type: String,
+        default: ''
+    },
     createAt: {
         type: Date,
         default: Date.now

@@ -1,13 +1,23 @@
 const express = require("express");
 const router = express.Router();
 
-const { getFoods, getOrders, createOrder, updateOrder, deleteOrder }=require("../controllers/orderController");
-const { getFood } = require("../controllers/foodController");
+const {
+    getOrders,
+    createOrder,
+    updateOrder,
+    deleteOrder,
+    updateOrderToInProgress,
+    cancelOrderAndModify
+
+}=require("../controllers/orderController");
+const { getFoods } = require("../controllers/foodController");
 const { getDrinks } = require("../controllers/drinkController");
 
 router.route("/foods").get(getFoods);
 router.route("/drinks").get(getDrinks);
 router.route("/").get(getOrders).post(createOrder);
 router.route("/:id").put(updateOrder).delete(deleteOrder);
+router.put('/orders/progress/:id', updateOrderToInProgress);
+router.put('/orders/cancel/:id', cancelOrderAndModify);
 
 module.exports = router;

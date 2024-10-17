@@ -74,12 +74,9 @@ const getOrders = asyncHandler(async(req, res) => {
 const createOrder = asyncHandler(async (req, res) => {
     const { foods, drinks, tableNumber } = req.body;
 
-    console.log("Foods received:", foods);
-    console.log("Drinks received:", drinks);
-
     if (!foods || !drinks || !tableNumber) {
         res.status(400);
-        return res.json("Foods, Drinks, and table number are mandatory!");
+        throw new Error("Foods, Drinks, and table number are mandatory!");
     }
 
     
@@ -90,21 +87,19 @@ const createOrder = asyncHandler(async (req, res) => {
     
     if (foodItems.length !== foods.length || drinkItems.length !== drinks.length) {
         res.status(404);
-        return res.json("Some foods or drinks were not found in the database.");
+        throw new Error("Some foods or drinks were not found in the database.");
     }
-
+    
     let totalPrice = 0;
 
     const updatedFoods = foods.map(f => {
         const foodItem = foodItems.find(item => item.name === f.name);
-
         totalPrice += foodItem.price * f.quantity;
         return { ...f, price: foodItem.price };
     });
 
     const updatedDrinks = drinks.map(d => {
         const drinkItem = drinkItems.find(item => item.name === d.name);
-        
         totalPrice += drinkItem.price * d.quantity;
         return { ...d, price: drinkItem.price };
     });
@@ -121,11 +116,63 @@ const createOrder = asyncHandler(async (req, res) => {
 });
 
 
+
+// @desc Update order status to "in progress"
+// @route PUT /api/orders/progress/:id
+// @access Admin
+const updateOrderToInProgress = asyncHandler(async(req, res) => {
+    const order = await Order.findById(req.params.id);
+
+    if(!order) {
+        res.status(404);
+        return res.json("Order not found");
+    }
+
+    //change status to in progress
+    order.status = "in progress";
+    await order.save();
+
+    res.status(200).json({
+        message: "Order now in progress",
+        order
+    });
+});
+
+
+
+// @desc Cancel an order and send message to client
+// @route  PUT /api/orders/cancel/:id
+// @access Admin
+const cancelOrderAndModify = asyncHandler(async(req, res) => {
+    const order = await Order.findById(req.params.id);
+
+    if(!order) {
+        res.status(404);
+        return res.json("Order not found");
+    }
+
+    //change status to cancel
+    order.status = "Canceled";
+    await order.save();
+
+    //send message from admin
+    const { message } = req.body;
+    const adminMessage = message || "Order has canceled";
+
+    res.status(200).json({
+        message: adminMessage,
+        order
+    });
+});
+
+
 module.exports = {
     createOrder,
     updateOrder,
     deleteOrder,
     getOrders,
     getFoods,
-    getDrinks
+    getDrinks,
+    cancelOrderAndModify,
+    updateOrderToInProgress
 }
