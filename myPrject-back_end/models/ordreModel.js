@@ -30,11 +30,11 @@ const orderSchema = mongoose.Schema({
     adminMessage: {
         type: String,
         default: ''
-    },
-    createAt: {
-        type: Date,
-        default: Date.now
     }
-});
+},
+{
+    timestamps: true
+}
+);
 
 module.exports = mongoose.model("Order", orderSchema);

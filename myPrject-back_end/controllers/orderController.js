@@ -22,6 +22,19 @@ const getDrinks = asyncHandler(async (req, res) => {
 });
 
 
+//@des Get Order
+//@route GET /api/orders/:id
+//access public
+const getOrder = asyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+    if(!order) {
+        res.status(404);
+        throw new Error("Food not found");
+    }
+    res.status(200).json(order);
+});
+
+
 //@des update an order
 //@route PUT /api/orders/:id
 //access public
@@ -109,7 +122,7 @@ const createOrder = asyncHandler(async (req, res) => {
         foods: updatedFoods,
         drinks: updatedDrinks,
         tableNumber,
-        totalPrice
+        totalPrice: parseFloat(totalPrice.toFixed(2))
     });
 
     res.status(201).json(order);
@@ -120,23 +133,33 @@ const createOrder = asyncHandler(async (req, res) => {
 // @desc Update order status to "in progress"
 // @route PUT /api/orders/progress/:id
 // @access Admin
-const updateOrderToInProgress = asyncHandler(async(req, res) => {
+const updateOrderToInProgress = asyncHandler(async (req, res) => {
+    
     const order = await Order.findById(req.params.id);
-
-    if(!order) {
-        res.status(404);
-        return res.json("Order not found");
+    if (!order) {
+        return res.status(404).json({ message: "Order not found" });
     }
 
-    //change status to in progress
+    console.log({ currentStatus: order.status });
+
+    
+    if (order.status !== "pending") {
+        return res.status(400).json({
+            message: "Order cannot be modified once it is in progress or canceled",
+        });
+    }
+
+    // change status to in progress
     order.status = "in progress";
     await order.save();
 
+    
     res.status(200).json({
-        message: "Order now in progress",
-        order
+        message: "Order is now in progress",
+        order,
     });
 });
+
 
 
 
@@ -171,6 +194,7 @@ module.exports = {
     updateOrder,
     deleteOrder,
     getOrders,
+    getOrder,
     getFoods,
     getDrinks,
     cancelOrderAndModify,

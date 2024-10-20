@@ -3,6 +3,7 @@ const router = express.Router();
 
 const {
     getOrders,
+    getOrder,
     createOrder,
     updateOrder,
     deleteOrder,
@@ -16,8 +17,8 @@ const { getDrinks } = require("../controllers/drinkController");
 router.route("/foods").get(getFoods);
 router.route("/drinks").get(getDrinks);
 router.route("/").get(getOrders).post(createOrder);
-router.route("/:id").put(updateOrder).delete(deleteOrder);
-router.put('/orders/progress/:id', updateOrderToInProgress);
-router.put('/orders/cancel/:id', cancelOrderAndModify);
+router.route("/:id").put(updateOrder).delete(deleteOrder).get(getOrder);
+router.patch('/progress/:id', updateOrderToInProgress);
+router.patch('/cancel/:id', cancelOrderAndModify);
 
 module.exports = router;
