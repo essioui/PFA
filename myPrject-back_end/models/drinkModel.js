@@ -17,6 +17,10 @@ const drinkSchema = mongoose.Schema({
         type: String,
         default: undefined,
     },
+    quantity: {
+        type: Number,
+        default: 1
+    },
 },
 {
     timestamps: true,

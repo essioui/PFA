@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.login {
+  width: 45%;
+  background-color: yellow;
+  padding: 15px 0px;
+  border: none;
+  border-radius: 15px;
+  font-size: 28px;
+  margin: 0px 15px;
+}
+
+.login:hover {
+  background-color: orange;
+  transition: 0.5s;
+}
