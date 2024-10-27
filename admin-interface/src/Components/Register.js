@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
     const [formInput, setFormInput] = useState({
         username: "",
         password: "",
     });
+
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -24,6 +27,8 @@ export default function Register() {
                 password: "",
             });
             alert("Account created successfully");
+
+            navigate("/login");
         })
         .catch((error) => {
             console.error('Error:', error);
