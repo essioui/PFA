@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../App.css';
 
 export default function MyForm() {
     const [formInputs, setFormInputs] = useState({
@@ -40,60 +41,84 @@ export default function MyForm() {
 
     return(
         <div className="outStyle">
-            <h2>Create New Food</h2>
             
-            <form className="fromStyle"
-            onSubmit={handleSubmit}
-            >
+            <form onSubmit={handleSubmit}>
 
-            
-                <label className="active">Name: </label>
-                <input className="active"
-                type="text"
-                name="name"
-                placeholder="Enter product name"
-                required
-                value={formInputs.name || ""}
-                onChange={(event) => {
-                    setFormInputs({...formInputs, name: event.target.value});
-                }}
-                />
+                <div>
+                    <div>
+                        <label>Name</label>
+                    </div>
 
-                <label className="active">Price: </label>
-                <input className="active"
-                type="number"
-                name="price"
-                placeholder="Enter product price"
-                required
-                value={formInputs.price || ""}
-                onChange={(event) => {
-                    setFormInputs({...formInputs, price: event.target.value > 0 
-                        ? event.target.value : ""});
-                }}
-                />
+                    <input className="put"
+                    type="text"
+                    name="name"
+                    placeholder="Enter Food name"
+                    required
+                    value={formInputs.name || ""}
+                    onChange={(event) => {
+                        setFormInputs({...formInputs, name: event.target.value});
+                    }}
+                    />
 
-                <label className="active">Category: </label>
-                <input className="active"
-                type="text"
-                name="category"
-                placeholder="Enter product category"
-                required
-                value={formInputs.category || ""}
-                onChange={(event) => {
-                    setFormInputs({...formInputs, category: event.target.value});
-                }}
-                />
+                </div>
+                
+                
+                <div>
+                    <div>
+                        <label>Price</label>
+                    </div>
 
-                <label className="active">Description: </label>
-                <input className="active"
-                type="text"
-                value={formInputs.description || ""}
-                onChange={(event) => {
-                    setFormInputs({...formInputs, description: event.target.value});
-                }}
-                />
+                    <input className="put"
+                    type="number"
+                    name="price"
+                    placeholder="Enter Food price"
+                    required
+                    value={formInputs.price || ""}
+                    onChange={(event) => {
+                        setFormInputs({...formInputs, price: event.target.value > 0 
+                            ? event.target.value : ""});
+                    }}
+                    />
 
-                <button className="active click">Submit</button>
+                </div>
+                
+                
+                <div>
+                    <div>
+                        <label>Category</label>
+                    </div>
+
+                    <input className="put"
+                    type="text"
+                    name="category"
+                    placeholder="Enter Food category"
+                    required
+                    value={formInputs.category || ""}
+                    onChange={(event) => {
+                        setFormInputs({...formInputs, category: event.target.value});
+                    }}
+                    />
+
+                </div>
+                
+                <div>
+                    <div>
+                        <label>Description</label>
+                    </div>
+
+                    <input className="put"
+                    type="text"
+                    value={formInputs.description || ""}
+                    onChange={(event) => {
+                        setFormInputs({...formInputs, description: event.target.value});
+                    }}
+                    />
+
+                </div>
+                
+                
+
+                <button className="click">Submit</button>
             </form>
         </div>
     );

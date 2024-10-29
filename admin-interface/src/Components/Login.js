@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Checkbox from '@mui/material/Checkbox';
+import '../App.css'
 
 export default function Login() {
     const [formInput, setFormInput] = useState({
@@ -28,47 +30,63 @@ export default function Login() {
         .then((data) => {
             if (data.accessToken) {
                 localStorage.setItem("accessToken", data.accessToken);
-                navigate("/AdminControllers"); // التوجيه إلى صفحة AdminControllers
+                navigate("/AdminControllers");
             } else {
                 throw new Error("Token is missing");
+                
             }
         })
         .catch((error) => {
-            console.error("Error:", error);
+            alert("you need to registry first");;
         });
     };
 
     return (
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    User Name:
+        <div style={{width: '30%', margin: 'auto'}}>
+            
+            <form onSubmit={handleSubmit} className="loginForm">
+
+                <div>
+                    <div>
+                        <label htmlFor="username" value="User Name">User Name</label>
+                    </div>
+                
                     <input
+                        className="loginInput"
                         type="text"
                         name="username"
                         placeholder="Please Enter your Name"
                         value={formInput.username}
+                        required
                         onChange={(event) => setFormInput({...formInput, username: event.target.value})}
                     />
-                </label>
+                
+                </div>
 
                 <br />
 
-                <label>
-                    Password:
+                <div>
+                    <div>
+                        <label htmlFor="password" value="password">Password</label>
+                    </div>
+
                     <input
+                        className="loginInput"
                         type="password"
                         name="password"
                         placeholder="Please Enter your Password"
                         value={formInput.password}
+                        required
                         onChange={(event) => setFormInput({...formInput, password: event.target.value})}
                     />
-                </label>
+                </div>
 
-                <br />
+                <div>
+                    <Checkbox id="check" />
+                    <label htmlFor="check">Remember Me</label>
+                </div>
 
-                <button type="submit">Login</button>
+                <button type="submit" className="loginBtn">Login</button>
             </form>
         </div>
     );

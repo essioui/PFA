@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ModifyFoods from './ModifyFoods';
 import ModifyDrinks from './ModifyDrinks'
+import '../App.css';
 
 export default function MyForm() {
     const [createFoods, setCreateForm] = useState(true);
@@ -8,9 +9,9 @@ export default function MyForm() {
   
 
     return(
-        <div>
-            <button onClick={() => setCreateForm(true)}>Modify Lists Foods</button>
-            <button onClick={() => setCreateForm(false)}>Modify Lists Drinks</button>
+        <div style={{marginTop: '20px'}}>
+            <button className="btn" onClick={() => setCreateForm(true)}>Modify Lists Foods</button>
+            <button className="btn" onClick={() => setCreateForm(false)}>Modify Lists Drinks</button>
 
             {createFoods ? (
                 <div>

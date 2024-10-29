@@ -1,38 +1,128 @@
-.App {
-  text-align: center;
+
+/*Login*/
+.loginForm {
+  height: 55vh;
+  margin: 20px 10px;
+  padding: 15px 25px;
+  border: 1px solid #a5a5a5;
+  border-radius: 15px;
+  background-color: #f5f1f1;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.loginForm .loginInput {
+  width: 85%;
+  border-radius: 5px;
+  padding: 10px 10px;
+  margin: 20px 0px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.loginForm .loginBtn {
+  width: 95%;
+  border-radius: 5px;
+  padding: 10px 10px;
+  margin: 20px 0px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.loginForm .loginBtn:hover {
+  background-color: orange;
+  transition: 0.5s;
+}
+
+
+/*Admin Controllers*/
+
+.AdminBtn {
+  width: 30%;
+  padding: 10px;
+  margin-left: 35px;
+  font-size: 20px;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+.AdminBtn:focus {
+  background-color: orange;
+}
+
+.AdminBtn:hover {
+  background-color: orange;
+}
+
+/*MyForm*/
+.btn {
+  padding: 10px 25px;
+  width: 45%;
+  margin-left: 30px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:focus {
+  background-color: orange;
+}
+
+/*My Form Products*/
+.outStyle {
+  width: fit-content;
+  margin: auto;
+  padding: 15px 25px;
+  border: 1px solid #a5a5a5;
+  border-radius: 15px;
+  background-color: #f5f1f1;
+  margin-top: 10px;
+}
+
+.put{
+  margin: 8px 0px;
+  padding: 5px 5px;
+  border-radius: 5px;
+}
+
+.click {
+  margin: 8px 0px;
+  padding: 5px 5px;
+  font-size: 18px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.click:hover {
+  background-color: orange;
+}
+
+/*Modify products*/
+.display {
+  width: 70%;
+  margin: auto;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: row;
+  gap: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+/*Products*/
+.products {
+  width: 50%;
+  padding: 15px 35px;
+  margin: auto;
+  margin-bottom: 30px;
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.productBtn {
+  width: 100%;
+  padding: 10px 5px;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+.productBtn:hover {
+  background-color: orange;
+}
+
+.inPro {
+  width: 100%;
+  height: 100px;
 }

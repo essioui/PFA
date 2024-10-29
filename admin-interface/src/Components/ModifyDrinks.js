@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import '../App.css';
 
 export default function DrinksList() {
     const [drinks, setDrinks] = useState([]);
@@ -52,68 +53,100 @@ export default function DrinksList() {
     };
 
     return (
-        <div>
-            <h2>Modify Drink</h2>
-            {drinks.map((drink) => (
-                <div key={drink._id}>
-                    <h3>{drink.name}</h3>
-                    <p>Price: {drink.price}</p>
-                    <p>Category: {drink.category}</p>
-                    <p>Description: {drink.description}</p>
-                    <button onClick={() => handleEditClick(drink)}>Edit</button>
-                    <button onClick={() => deleteDrink(drink._id)}>Delete</button>
-                </div>
-            ))}
 
-            {editingDrink && (
-                <div>
-                    <h3>Edit Food Item</h3>
-                    <form
-                        onSubmit={(e) => {
-                            e.preventDefault();
-                            saveDrink();
-                        }}
-                    >
-                        <label>Name:</label>
-                        <input
-                            type="text"
-                            name="name"
-                            value={editingDrink.name || ""}
-                            onChange={handleInputChange}
-                            required
-                        />
+        <div className="display">
 
-                        <label>Price:</label>
-                        <input
-                            type="number"
-                            name="price"
-                            value={editingDrink.price || ""}
-                            onChange={handleInputChange}
-                            required
-                        />
+            <div style={{textAlign: 'center'}}>
+                {drinks.map((drink) => (
+                    <div key={drink._id}>
+                        <h3>{drink.name}</h3>
+                        <p>Price: {drink.price}</p>
+                        <p>Category: {drink.category}</p>
+                        <p>Description: {drink.description}</p>
+                        <button onClick={() => handleEditClick(drink)}>Edit</button>
+                        <button onClick={() => deleteDrink(drink._id)}>Delete</button>
+                        <hr style={{border: '1px solid black'}}></hr>
+                    </div>
+                ))}
+            </div>
 
-                        <label>Category:</label>
-                        <input
-                            type="text"
-                            name="category"
-                            value={editingDrink.category || ""}
-                            onChange={handleInputChange}
-                            required
-                        />
+            <div>
+                {editingDrink && (
 
-                        <label>Description:</label>
-                        <input
-                            type="text"
-                            name="description"
-                            value={editingDrink.description || ""}
-                            onChange={handleInputChange}
-                        />
+                    <div className="outStyle">
+                        <h2>Edit Drink</h2>
+                        <form
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                saveDrink();
+                            }}
+                        >
+                            <div>
+                                <div>
+                                    <label>Name</label>
+                                </div>
 
-                        <button type="submit">Save</button>
-                        <button onClick={() => setEditingDrink(null)}>Cancel</button>
-                    </form>
-                </div>
-            )}
+                                <input className="put"
+                                type="text"
+                                name="name"
+                                value={editingDrink.name || ""}
+                                onChange={handleInputChange}
+                                required
+                                />
+                            </div>
+                            
+                            
+                            <div>
+                                <div>
+                                    <label>Price</label>
+                                </div>
+
+                                <input className="put"
+                                type="number"
+                                name="price"
+                                value={editingDrink.price || ""}
+                                onChange={handleInputChange}
+                                required
+                                />
+
+                            </div>
+                            
+                            <div>
+                                <div>
+                                    <label>Category</label>
+                                </div>
+
+                                <input className="put"
+                                type="text"
+                                name="category"
+                                value={editingDrink.category || ""}
+                                onChange={handleInputChange}
+                                required
+                                />
+                            </div>
+                            
+                            <div>
+                                <div>
+                                    <label>Description</label>
+                                </div>
+
+                                <input className="put"
+                                type="text"
+                                name="description"
+                                value={editingDrink.description || ""}
+                                onChange={handleInputChange}
+                                />
+                            </div>
+                            
+                        
+
+                            <button className="click" type="submit">Save</button> <br></br>
+                            <button className="click" onClick={() => setEditingDrink(null)}>Cancel</button>
+                        </form>
+                    </div>
+                )}
+            </div>
+
         </div>
     );
 }

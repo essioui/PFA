@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import '../App.css'
 
 export default function Register() {
     const [formInput, setFormInput] = useState({
@@ -37,42 +38,46 @@ export default function Register() {
     };
 
     return (
-        <div>
-            <h2>Create a new account</h2>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Username:
+        <div style={{width: '30%', margin: 'auto'}}>
+            
+            <form onSubmit={handleSubmit} className="loginForm">
+
+                <div>
+                    <div>
+                        <label htmlFor="username" value="User Name">User Name</label>
+                    </div>
+                
                     <input
+                        className="loginInput"
                         type="text"
                         name="username"
-                        placeholder="Enter your username"
-                        required
+                        placeholder="Please Enter your Name"
                         value={formInput.username}
-                        onChange={(event) => {
-                            setFormInput({...formInput, username: event.target.value});
-                        }}
+                        required
+                        onChange={(event) => setFormInput({...formInput, username: event.target.value})}
                     />
-                </label>
+                
+                </div>
 
                 <br />
 
-                <label>
-                    Password:
+                <div>
+                    <div>
+                        <label htmlFor="password" value="password">Password</label>
+                    </div>
+
                     <input
+                        className="loginInput"
                         type="password"
                         name="password"
-                        placeholder="Enter your password"
-                        required
+                        placeholder="Please Enter your Password"
                         value={formInput.password}
-                        onChange={(event) => {
-                            setFormInput({...formInput, password: event.target.value});
-                        }}
+                        required
+                        onChange={(event) => setFormInput({...formInput, password: event.target.value})}
                     />
-                </label>
+                </div>
 
-                <br />
-
-                <button type="submit">Register</button>
+                <button type="submit" className="loginBtn">Register</button>
             </form>
         </div>
     );
