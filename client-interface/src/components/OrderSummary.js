@@ -85,7 +85,7 @@ export default function OrderSummary({ orderItems }) {
 };
 
     return (
-        <div>
+        <div style={{marginTop: "20px"}}>
             <DataMenu setFoods={setFoods} setDrinks={setDrinks} />
 
             <TableNumberInput
@@ -100,18 +100,18 @@ export default function OrderSummary({ orderItems }) {
                 <>
                     <div>
                         {orderItems.map((item, index) => (
-                            <div key={index} style={{ marginBottom: '10px', backgroundColor: '#167f9c' }}>
+                            <div key={index} style={{ marginBottom: '10px', backgroundColor: 'yellow' }}>
                                 <p>
                                     {item.name} - Quantity: {item.quantity} - Total Price: {(item.quantity * item.price).toFixed(2)} TND
                                 </p>
                             </div>
                         ))}
                     </div>
-                    <div style={{backgroundColor: '#006994', color: 'orange'}}>
-                        Total: {orderItems.reduce((acc, item) => acc + (item.quantity * item.price), 0).toFixed(2)} TND
+                    <div style={{backgroundColor: 'yellow'}}>
+                        <b>Total: </b>{orderItems.reduce((acc, item) => acc + (item.quantity * item.price), 0).toFixed(2)} TND
                     </div>
-                    <button style={{backgroundColor: 'orange', width: '50%', marginTop: '40px', marginBottom: '40px' ,margin: 'auto', padding: '15px 0px'}} onClick={sendOrderToDatabase}>Send Order</button>
-                    <div style={{width: '75%', margin: 'auto', backgroundColor: 'blue'}}>{orderStatus && <p>{orderStatus}</p>}</div>
+                    <button style={{backgroundColor: 'orange', width: '50%', marginTop: '40px', marginBottom: '40px' ,margin: 'auto', padding: '15px 0px', fontSize: '22px'}} onClick={sendOrderToDatabase}>Send Order</button>
+                    {orderStatus && <p style={{width: '75%', margin: 'auto', backgroundColor: 'blue', padding: '5px 0px'}}>{orderStatus}</p>}
                 </>
             )}
         </div>

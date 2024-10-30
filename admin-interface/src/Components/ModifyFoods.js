@@ -57,15 +57,26 @@ export default function FoodList() {
             
             <div style={{textAlign: 'center'}}>
                 {foods.map((food) => (
-                    <div key={food._id}>
-                        <h3>{food.name}</h3>
-                        <p>Price: {food.price}</p>
-                        <p>Category: {food.category}</p>
-                        <p>Description: {food.description}</p>
-                        <button onClick={() => handleEditClick(food)}>Edit</button>
-                        <button onClick={() => deleteFood(food._id)}>Delete</button>
-                        <hr style={{border: '1px solid black'}}></hr>
-                    </div>
+                    <div key={food._id} style={{display: 'flex', flexDirection: 'row', borderBottom: '2px solid black', marginTop: '25px'}}>
+
+                        <div style={{width: '50%', margin: 'auto'}}>
+                            <img
+                            alt="food"
+                            src={food.imageUrl}
+                            style={{width: "200px", height: '200px'}}
+                            />
+                        </div>
+
+                        <div style={{width: '50%', margin: 'auto'}}>
+                            <h3>{food.name}</h3>
+                            <p>Price: {food.price}</p>
+                            <p>Category: {food.category}</p>
+                            <p>Description: {food.description}</p>
+                            <button className="click" onClick={() => handleEditClick(food)}>Edit</button>
+                            <button className="click" onClick={() => deleteFood(food._id)}>Delete</button>
+                        </div>
+
+                    </div> 
                 ))}
             </div>
 
@@ -79,7 +90,7 @@ export default function FoodList() {
                                 e.preventDefault();
                                 saveFood();
                             }}
-                        >
+                            >
                             <div>
                                 <div>
                                     <label>Name</label>
@@ -135,6 +146,18 @@ export default function FoodList() {
                                 onChange={handleInputChange}
                                 />
 
+                            </div>
+
+                            <div>
+                                <div>
+                                    <label>Image Url</label>
+                                </div>
+                                <input className="put"
+                                type="text"
+                                name="imageUrl"
+                                value={editingFood.imageUrl || ""}
+                                onChange={handleInputChange}
+                                />
                             </div>
                             
                             

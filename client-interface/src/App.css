@@ -73,3 +73,13 @@
   background-color: orange;
   transition: 0.5s;
 }
+
+/*products items*/
+.itemBtn {
+  width: 150px;
+  margin-left: 15px;
+}
+
+.itemBtn:hover {
+  background-color: orange;
+}

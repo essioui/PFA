@@ -7,6 +7,7 @@ export default function MyForm() {
         price: "",
         category: "",
         description: "",
+        imageUrl: "",
     });
 
     const token = localStorage.getItem("accessToken");
@@ -32,6 +33,7 @@ export default function MyForm() {
                 price: "",
                 category: "",
                 description: "",
+                imageUrl: "",
             });
         })
         .catch((error) => {
@@ -43,6 +45,25 @@ export default function MyForm() {
         <div className="outStyle">
             
             <form onSubmit={handleSubmit}>
+
+
+                <div>
+                    <div>
+                        <label>Image URL</label>
+                    </div>
+                
+                    <input
+                        className="put"
+                        type="text"
+                        name="imageUrl"
+                        placeholder="Enter Image URL"
+                        value={formInputs.imageUrl || ""}
+                        onChange={(event) => {
+                            setFormInputs({...formInputs, imageUrl: event.target.value});
+                        }}
+                    />
+                </div>
+
 
                 <div>
                     <div>

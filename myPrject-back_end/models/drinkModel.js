@@ -21,6 +21,10 @@ const drinkSchema = mongoose.Schema({
         type: Number,
         default: 1
     },
+    imageUrl: {
+        type: String,
+        default: ""
+    },
 },
 {
     timestamps: true,

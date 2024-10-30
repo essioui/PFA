@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import '../App.css';
 
 export default function DrinksItems({ addToOrder }) {
     const [drinks, setDrinks] = useState([]);
@@ -34,22 +35,35 @@ export default function DrinksItems({ addToOrder }) {
 
     return (
         <div>
-            <h2>Drinks List</h2>
+            
             {drinks.map((drink) => (
-                <div key={drink._id} style={{ border: '1px solid red', padding: '10px', marginBottom: '10px' }}>
-                    <h3>{drink.name}</h3>
-                    <p>Price: {drink.price} TND</p>
-                    <p>Category: {drink.category}</p>
-                    {drink.description && <p>Description: {drink.description}</p>}
+                <div key={drink._id} style={{display: 'flex', flexDirection: 'row', borderBottom: '2px solid black', marginTop: '25px'}}>
 
-                    <input
-                        type="number"
-                        min="1"
-                        placeholder="Quantity"
-                        defaultValue={1}
-                        onChange={(e) => handleQuantityChange(drink._id, e.target.value)}
-                    />
-                    <button onClick={() => handleAddToOrder(drink)}>Add to Order</button>
+                    <div style={{width: '50%', margin: 'auto'}}>
+                        <img
+                            alt="drink"
+                            src={drink.imageUrl}
+                            style={{width: "200px", height: '200px'}}
+                        />
+                    </div>
+
+                    <div style={{width: '50%', margin: 'auto'}}>
+                        <h3>{drink.name}</h3>
+                        <p>Price: {drink.price} TND</p>
+                        <p>Category: {drink.category}</p>
+                        {drink.description && <p>Description: {drink.description}</p>}
+
+                        <input
+                        style={{width: '50px'}}
+                            type="number"
+                            min="1"
+                            placeholder="Quantity"
+                            defaultValue={1}
+                            onChange={(e) => handleQuantityChange(drink._id, e.target.value)}
+                        />
+                        <button className='itemBtn' onClick={() => handleAddToOrder(drink)}>Add to Order</button>
+                    </div>
+
                 </div>
             ))}
         </div>

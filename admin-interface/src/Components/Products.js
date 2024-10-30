@@ -51,7 +51,7 @@ export default function Orders() {
             const response = await fetch(`http://localhost:5001/api/orders/cancel/${id}`, {
                 method: "PATCH",
                 headers,
-                body: JSON.stringify({message: cancelMessage}),
+                body: JSON.stringify({adminMessage: cancelMessage}),
             });
 
             if(response.ok) {
@@ -114,7 +114,7 @@ export default function Orders() {
                 <input
                 className="inPro"
                 type="text"
-                value={cancelMessage}
+                value={cancelMessage.adminMessage}
                 onChange={(e) => setCancelMessage(e.target.value)}
                 placeholder="Enter Cancellation message"
                 />

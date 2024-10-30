@@ -58,14 +58,25 @@ export default function DrinksList() {
 
             <div style={{textAlign: 'center'}}>
                 {drinks.map((drink) => (
-                    <div key={drink._id}>
-                        <h3>{drink.name}</h3>
-                        <p>Price: {drink.price}</p>
-                        <p>Category: {drink.category}</p>
-                        <p>Description: {drink.description}</p>
-                        <button onClick={() => handleEditClick(drink)}>Edit</button>
-                        <button onClick={() => deleteDrink(drink._id)}>Delete</button>
-                        <hr style={{border: '1px solid black'}}></hr>
+                    <div key={drink._id} style={{display: 'flex', flexDirection: 'row', borderBottom: '2px solid black', marginTop: '25px'}}>
+
+                        <div style={{width: '50%', margin: 'auto'}}>
+                            <img
+                            alt="drink"
+                            src={drink.imageUrl}
+                            style={{width: "200px", height: '200px'}}
+                            />
+                        </div>
+
+                        <div style={{width: '50%', margin: 'auto'}}>
+                            <h3>{drink.name}</h3>
+                            <p>Price: {drink.price}</p>
+                            <p>Category: {drink.category}</p>
+                            <p>Description: {drink.description}</p>
+                            <button className="click" onClick={() => handleEditClick(drink)}>Edit</button>
+                            <button className="click" onClick={() => deleteDrink(drink._id)}>Delete</button>
+                        </div>
+
                     </div>
                 ))}
             </div>
@@ -134,6 +145,18 @@ export default function DrinksList() {
                                 type="text"
                                 name="description"
                                 value={editingDrink.description || ""}
+                                onChange={handleInputChange}
+                                />
+                            </div>
+
+                            <div>
+                                <div>
+                                    <label>Image Url</label>
+                                </div>
+                                <input className="put"
+                                type="text"
+                                name="imageUrl"
+                                value={editingDrink.imageUrl || ""}
                                 onChange={handleInputChange}
                                 />
                             </div>

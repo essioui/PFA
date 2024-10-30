@@ -16,7 +16,7 @@ const getFoods = asyncHandler(async (req, res) => {
 //access public
 const createFood = asyncHandler(async (req, res) => {
     console.log("the request body is: ", req.body);
-    const {name, price, category, description, quantity} = req.body;
+    const {name, price, category, description, quantity, imageUrl} = req.body;
     if(!name || !category || !price) {
         res.status(400);
         throw new Error("All Fields are mondatory !");
@@ -27,6 +27,7 @@ const createFood = asyncHandler(async (req, res) => {
         category,
         description: description || undefined,
         quantity: quantity >= 2 ? quantity : 1,
+        imageUrl,
     });
     res.status(201).json(food);
 });
