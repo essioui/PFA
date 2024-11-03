@@ -5,7 +5,8 @@ import '../App.css';
 export default function Home() {
 
   const navigate = useNavigate();
-  const goToOrders = () => {
+  const goToOrders = (e) => {
+    e.preventDefault();
     navigate('/orders');
   }
     return(
@@ -56,8 +57,8 @@ export default function Home() {
 
             
 
-            <form>
-              <label for="myBtn">
+            <form onSubmit={goToOrders}>
+              <label htmlFor="myBtn">
                 <div className="home-btn">
                 <button id="myBtn" className="go-btn" onClick={goToOrders}>Go To Lists</button>
               </div>
