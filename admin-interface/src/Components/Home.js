@@ -6,7 +6,7 @@ export default function Home() {
     return(
         <div style={{height: "63vh", width: "80%", margin: "auto", textAlign: "center"}}>
 
-            <h2>Log in or create a new account</h2>
+            <h2>Login or create a new account</h2>
 
             <div style={{marginTop: "150px"}}>
                 <Link to="/Login">

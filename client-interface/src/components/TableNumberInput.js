@@ -3,9 +3,9 @@ import React from "react";
 export default function TableNumberInput({ tableNumber, onTableNumberChange }) {
     return(
         <label>
-            <div>
-                <h2>Table Number</h2>
-            </div>
+
+            <h2>Table Number: </h2>
+
             <input
             type="Number"
             value={tableNumber}
