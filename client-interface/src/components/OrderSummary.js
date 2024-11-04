@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TableNumberInput from './TableNumberInput';
 import DataMenu from './DataMenu';
 import Modal from './Modal';
@@ -9,11 +9,12 @@ export default function OrderSummary({ orderItems }) {
     const [tableNumber, setTableNumber] = useState('');
     const [orderStatus, setOrderStatus] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [orderId, setOrderId] = useState(null);
 
     const sendOrderToDatabase = async () => {
         try {
             const tableNum = Math.max(1, parseFloat(tableNumber));
-            if(isNaN(tableNum) || tableNum <= 0) {
+            if (isNaN(tableNum) || tableNum <= 0) {
                 alert("Please verify your table number");
                 return;
             }
@@ -66,6 +67,9 @@ export default function OrderSummary({ orderItems }) {
                 throw new Error(`Failed to send order: ${errorMessage}`);
             }
 
+            const data = await response.json();
+            setOrderId(data._id);
+
             setOrderStatus('Order sent successfully');
             console.log('Order sent successfully');
         } catch (error) {
@@ -74,13 +78,31 @@ export default function OrderSummary({ orderItems }) {
         }
     };
 
+    
+    useEffect(() => {
+        if (!orderId) return;
+
+        const intervalId = setInterval(async () => {
+            try {
+                const response = await fetch(`http://localhost:5001/api/orders/${orderId}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setOrderStatus(data.status);
+                } else {
+                    console.error('Error fetching order status');
+                }
+            } catch (error) {
+                console.error('Error fetching order status:', error);
+            }
+        }, 5000);
+
+        return () => clearInterval(intervalId);
+    }, [orderId]);
+
     return (
         <div style={{ marginTop: "20px" }}>
             <DataMenu setFoods={setFoods} setDrinks={setDrinks} />
 
-            
-
-            
             <h2>Order Summary</h2>
             {orderItems.length === 0 ? (
                 <p>No products added.</p>
@@ -94,13 +116,12 @@ export default function OrderSummary({ orderItems }) {
 
             {isModalOpen && (
                 <Modal onClose={() => setIsModalOpen(false)}>
-
                     <h2>Order Summary</h2>
 
-                        <TableNumberInput
-                            tableNumber={tableNumber}
-                            onTableNumberChange={setTableNumber}
-                        />
+                    <TableNumberInput
+                        tableNumber={tableNumber}
+                        onTableNumberChange={setTableNumber}
+                    />
 
                     {orderItems.map((item, index) => (
                         <div key={index}>
@@ -114,10 +135,9 @@ export default function OrderSummary({ orderItems }) {
                     </div>
                     <button onClick={sendOrderToDatabase}>Send Order</button>
 
-                    {orderStatus && <p >{orderStatus}</p>}
+                    {orderStatus && <p >Status: {orderStatus}</p>}
                 </Modal>
             )}
-
         </div>
     );
 }
