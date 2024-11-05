@@ -9,12 +9,13 @@ export default function Home() {
     e.preventDefault();
     navigate('/orders');
   }
+  
     return(
         <div>
             <div>
-                <div style={{backgroundColor: 'yellow', width: '100%'}}>
-                  <h1 style={{padding: '10px 0px'}}>Welcome to Our Restaurant</h1>
-                  <p style={{fontSize: '32px'}}>Desert</p>
+                <div style={{backgroundColor: 'yellow', width: '100%', padding: '2px 0px'}}>
+                  <h1 style={{padding: '10px 0px', marginBottom: '2px'}}>Welcome to Our Restaurant</h1>
+                  <p style={{fontSize: '32px', marginTop: '2px'}}><b>Anatantara</b></p>
                 </div>
 
               <div className="presentation">

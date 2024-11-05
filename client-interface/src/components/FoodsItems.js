@@ -37,9 +37,9 @@ export default function FoodsItems({ addToOrder }) {
         <div>
             
             {foods.map((food) => (
-                <div key={food._id} style={{display: 'flex', flexDirection: 'row', borderBottom: '2px solid black', marginTop: '25px'}}>
+                <div key={food._id} className="drink-item">
 
-                    <div style={{width: '50%', margin: 'auto'}}>
+                    <div className="drink-image">
                         <img
                         alt='food'
                         src={food.imageUrl}
@@ -47,7 +47,7 @@ export default function FoodsItems({ addToOrder }) {
                     />
                     </div>
 
-                    <div style={{width: '50%', margin: 'auto'}}>
+                    <div className="drink-details">
 
                         <h3>{food.name}</h3>
                         <p>Price: {food.price} TND</p>
@@ -55,13 +55,14 @@ export default function FoodsItems({ addToOrder }) {
                         {food.description && <p>Description: {food.description}</p>}
 
                         <input
+                        className="quantity-input"
                             type="number"
                             min="1"
                             placeholder="Quantity"
                             defaultValue={1}
                             onChange={(e) => handleQuantityChange(food._id, e.target.value)}
                         />
-                        <button className='itemBtn' onClick={() => handleAddToOrder(food)}>Add to Order</button>
+                        <button className="itemBtn" onClick={() => handleAddToOrder(food)}>Add to Order</button>
 
                     </div>
 

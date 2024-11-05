@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import TableNumberInput from './TableNumberInput';
 import DataMenu from './DataMenu';
 import Modal from './Modal';
+import '../App.css';
 
 export default function OrderSummary({ orderItems }) {
     const [foods, setFoods] = useState([]);
@@ -108,8 +109,8 @@ export default function OrderSummary({ orderItems }) {
                 <p>No products added.</p>
             ) : (
                 <>
-                    <button onClick={() => setIsModalOpen(true)} style={{ backgroundColor: 'orange', width: '50%', marginTop: '20px', padding: '10px 0px', fontSize: '18px' }}>
-                        Show Order Summary
+                    <button onClick={() => setIsModalOpen(true)} className='orderBtn'>
+                        Show Order 
                     </button>
                 </>
             )}
@@ -124,13 +125,13 @@ export default function OrderSummary({ orderItems }) {
                     />
 
                     {orderItems.map((item, index) => (
-                        <div key={index}>
+                        <div key={index} className='order-item'>
                             <p>
                                 {item.name} - Quantity: {item.quantity} - Total Price: {(item.quantity * item.price).toFixed(2)} TND
                             </p>
                         </div>
                     ))}
-                    <div>
+                    <div className='total-price'>
                         <b>Total: </b>{orderItems.reduce((acc, item) => acc + (item.quantity * item.price), 0).toFixed(2)} TND
                     </div>
                     <button onClick={sendOrderToDatabase}>Send Order</button>

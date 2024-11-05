@@ -1,9 +1,16 @@
 import React from "react";
+import '../App.css';
 
 export default function Header() {
     return(
-        <div style={{width: "100%", backgroundColor: "yellow", padding: "15px 0px", textAlign: "center"}}>
-            <h1>Welcome to Desert restaurant</h1>
+        <div style={{
+            width: "100%",
+            backgroundColor: "#ffd700",
+            padding: "15px 0px",
+            textAlign: "center",
+            color: "white"
+        }}>
+            <h1 className="headerTitle">Welcome to <span class="highlight">Antantara</span> Restaurant</h1>
         </div>
     );
 }

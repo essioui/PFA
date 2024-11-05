@@ -29,19 +29,17 @@ export default function Orders() {
             });
             const data = await response.json();
 
-            if(response.ok) {
-                setOrders((prevOrders) => 
-                prevOrders.map((order) =>
-                    order._id === id ? { ...order, status: "In Progress" } : order
-                )
-            );
-            alert(data.message);
+            if (response.ok) {
+                setOrders((prevOrders) =>
+                    prevOrders.map((order) =>
+                        order._id === id ? { ...order, status: "In Progress" } : order
+                    )
+                );
+                alert(data.message);
             } else {
-                console.error("Failed to update status.", data.message);
                 alert(data.message);
             }
         } catch (error) {
-            console.error("Error", error);
             alert("Error updating status. Please try again.");
         }
     };
@@ -51,10 +49,10 @@ export default function Orders() {
             const response = await fetch(`http://localhost:5001/api/orders/cancel/${id}`, {
                 method: "PATCH",
                 headers,
-                body: JSON.stringify({adminMessage: cancelMessage}),
+                body: JSON.stringify({ adminMessage: cancelMessage }),
             });
 
-            if(response.ok) {
+            if (response.ok) {
                 const updateOrder = await response.json();
                 setOrders((prevOrders) =>
                     prevOrders.map((order) =>
@@ -63,60 +61,65 @@ export default function Orders() {
                 );
                 alert(updateOrder.message);
             } else {
-                console.error("Failed to cancel order");
+                alert("Failed to cancel order");
             }
         } catch (error) {
-            console.error("Error", error);
+            alert("Error updating order status. Please try again.");
+        }
+    };
+
+    const deleteOrder = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:5001/api/orders/${id}`, {
+                method: "DELETE",
+                headers,
+            });
+
+            if (response.ok) {
+                setOrders((prevOrders) =>
+                    prevOrders.filter((order) => order._id !== id)
+                );
+                alert("Order deleted successfully.");
+            } else {
+                alert("Failed to delete order.");
+            }
+        } catch (error) {
+            alert("Error deleting order. Please try again.");
         }
     };
 
     return (
-        <div style={{width: '70%', margin: '20px 20px'}}>
+        <div className="orders-container">
             {orders.map((order) => (
-                <div key={order._id} className="products">
+                <div key={order._id} className="order-card">
                     <h4>Table Number: {order.tableNumber}</h4>
                     <div>
-                        <h4>Foods:</h4>
-                        <div>
-                            {order.foods.map((food) => (
-                                <p key={food._id}>
-                                    {food.name}, Quantity: {food.quantity}
-                                </p>
-                            ))}
-                        </div>
+                        <h5>Foods:</h5>
+                        {order.foods.map((food) => (
+                            <p key={food._id}>{food.name}, Quantity: {food.quantity}</p>
+                        ))}
                     </div>
-
                     <div>
-                        <h4>Drinks:</h4>
-                        <div>
-                            {order.drinks.map((drink) => (
-                                <p key={drink._id}>
-                                    {drink.name}, Quantity: {drink.quantity}
-                                </p>
-                            ))}
-                        </div>
+                        <h5>Drinks:</h5>
+                        {order.drinks.map((drink) => (
+                            <p key={drink._id}>{drink.name}, Quantity: {drink.quantity}</p>
+                        ))}
                     </div>
                     <p>Status: <b>{order.status}</b></p>
                     <p>Total Price: {order.totalPrice.toFixed(2)}</p>
-                    <button className="productBtn" onClick={() => updateOrderStatusToInProgress(order._id)}
-                    >
-                        Set in Progress
-                    </button> <br></br>
-                    <button className="productBtn" onClick={() => updateOrderStatusToInCancel(order._id)}
-                    >
-                        Set Cancel
-                    </button>
+                    <button className="order-btn progress-btn" onClick={() => updateOrderStatusToInProgress(order._id)}>Set in Progress</button>
+                    <button className="order-btn cancel-btn" onClick={() => updateOrderStatusToInCancel(order._id)}>Set Cancel</button>
+                    <button className="order-btn delete-btn" onClick={() => deleteOrder(order._id)}>Delete Order</button>
                 </div>
             ))}
-
-            <div>
-                <label>Cancel Message</label>
+            <div className="cancel-message-container">
+                <label>Cancel Message:</label>
                 <input
-                className="inPro"
-                type="text"
-                value={cancelMessage.adminMessage}
-                onChange={(e) => setCancelMessage(e.target.value)}
-                placeholder="Enter Cancellation message"
+                    className="cancel-input"
+                    type="text"
+                    value={cancelMessage}
+                    onChange={(e) => setCancelMessage(e.target.value)}
+                    placeholder="Enter Cancellation message"
                 />
             </div>
         </div>

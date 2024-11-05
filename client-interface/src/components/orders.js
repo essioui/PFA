@@ -16,7 +16,7 @@ export default function Orders() {
     };
 
     return (
-        <div>
+        <div className='main-container'>
             <Header />
             
             <div>
@@ -31,7 +31,6 @@ export default function Orders() {
             <OrderSummary orderItems={orderItems} />
             
             <Footer />
-            <></>
         </div>
     );
 }
