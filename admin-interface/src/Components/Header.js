@@ -10,7 +10,7 @@ export default function Header() {
             textAlign: "center",
             color: "white"
         }}>
-            <h1 className="headerTitle">Welcome to <span class="highlight">Antantara</span> Restaurant</h1>
+            <h1 className="headerTitle">Welcome to <span className="highlight">Desert</span> Restaurant</h1>
         </div>
     );
 }

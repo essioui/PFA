@@ -95,7 +95,7 @@ export default function OrderSummary({ orderItems }) {
             } catch (error) {
                 console.error('Error fetching order status:', error);
             }
-        }, 5000);
+        }, 15000);
 
         return () => clearInterval(intervalId);
     }, [orderId]);

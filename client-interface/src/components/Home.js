@@ -15,7 +15,7 @@ export default function Home() {
             <div>
                 <div style={{backgroundColor: 'yellow', width: '100%', padding: '2px 0px'}}>
                   <h1 style={{padding: '10px 0px', marginBottom: '2px'}}>Welcome to Our Restaurant</h1>
-                  <p style={{fontSize: '32px', marginTop: '2px'}}><b>Anatantara</b></p>
+                  <p style={{fontSize: '32px', marginTop: '2px'}}><b>Desert</b></p>
                 </div>
 
               <div className="presentation">
